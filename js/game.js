@@ -38,12 +38,18 @@ class Game {
     this.asteroids.push(newAsteroid)
   }
 
+  _removeAsteroid() {
+    this.ctx.clearRect(0, 0, 1000, 600)
+  }
+
+
   _clean() {
     this.ctx.clearRect(0, 0, 1000, 600)
   }
 
   _update() {
     this._clean();
+    this._removeAsteroid()
     this._drawSpaceShip();
     this._drawAsteroid();
     let counter = 0;
@@ -53,6 +59,7 @@ class Game {
         counter++
       }
     }, 1000);
+
     window.requestAnimationFrame(() => this._update());
   }
 
