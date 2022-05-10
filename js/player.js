@@ -8,11 +8,17 @@ class Player {
 
     }
 
-    shoot() {
-
+    moveRight() {
+        this.x = this.x + 25;
+        if (this.x > 1000) {
+            this.x = 10 - this.width
+        }
     }
 
-    rotateShip(el) {
-
+    moveLeft() {
+        this.x = this.x - 25;
+        if (this.x + this.width < 0) {
+            this.x = 990
+        }
     }
 }
