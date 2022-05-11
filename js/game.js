@@ -65,7 +65,13 @@ class Game {
   }
 
   _removeAsteroid() {
-    this.ctx.clearRect(0, 0, 1000, 600)
+    this.asteroids.forEach((asteroid) => {
+      if (asteroid.y > 650) {
+        let index = this.asteroids.indexOf(asteroid);
+        this.asteroids.splice(index, 1)
+      }
+      console.log(this.asteroids)
+    })
   }
 
 
@@ -75,7 +81,6 @@ class Game {
 
   _update() {
     this._clean();
-
     this._removeAsteroid()
     this._drawSpaceShip();
     this._drawAsteroid();
@@ -86,7 +91,7 @@ class Game {
         this.asteroids[counter]._fallingAsteroid();
         counter++
       }
-    }, 1000);
+    }, 500);
 
     window.requestAnimationFrame(() => this._update());
   }
