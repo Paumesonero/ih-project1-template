@@ -38,6 +38,32 @@ class Game {
     this.asteroids.push(newAsteroid)
   }
 
+  _detectCollision() {
+    this.asteroids.forEach(asteroid => {
+      if (
+        (this.spaceShip.x >= asteroid.x && this.spaceShip.x <= asteroid.x + asteroid.width ||
+          this.spaceShip.x + this.spaceShip.width >= asteroid.x && this.spaceShip.x + this.spaceShip.width <= asteroid.x + asteroid.width
+        ) &&
+        (this.spaceShip.y >= asteroid.y && this.spaceShip.y <= asteroid.y + asteroid.height ||
+          this.spaceShip.y + this.spaceShip.height >= asteroid.y && this.spaceShip.y + this.spaceShip.height <= asteroid.y + asteroid.height)
+      ) {
+        console.log('oh oh, we have a problemo')
+        this.gameOver()
+      }
+    })
+  }
+
+
+  gameOver() {
+    clearInterval(this.speedFall);
+    clearInterval(this.asteroidInterval);
+
+    const gameOverPage = document.getElementById('lose-page')
+    gameOverPage.style = 'display : flex';
+    const hideCanvas = document.getElementById('canvas');
+    hideCanvas.style = 'display: none;'
+  }
+
   _removeAsteroid() {
     this.ctx.clearRect(0, 0, 1000, 600)
   }
@@ -49,9 +75,11 @@ class Game {
 
   _update() {
     this._clean();
+
     this._removeAsteroid()
     this._drawSpaceShip();
     this._drawAsteroid();
+    this._detectCollision();
     let counter = 0;
     this.speedFall = setInterval(() => {
       if (counter < this.asteroids.length) {
