@@ -30,7 +30,7 @@ class Game {
   }
   _drawAsteroid() {
     this.asteroids.forEach((el) => {
-      this.ctx.fillRect(el.x, el.y, el.width, el.height);
+      this.ctx.drawImage(asteroidImg, el.x, el.y, el.width, el.height);
     });
   }
   _makeAsteroid() {
