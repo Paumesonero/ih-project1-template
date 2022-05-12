@@ -1,15 +1,14 @@
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.spaceShip = new Player(450, 400, 130, 130, bulletController);
-    this.bullet = new BulletController(canvas);
+    this.spaceShip = new Player(450, 400, 130, 130);
+    // this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
     this.speedFall = undefined;
     this.asteroids = [];
+    this.charger = [];
+    // this.state = 'still'; // 'shooting'
   }
-
-
-
 
   _assignControls() {
     document.addEventListener('keydown', (event) => {
@@ -21,7 +20,8 @@ class Game {
           this.spaceShip.moveRight();
           break;
         case 'Space':
-          this.spaceShip.shoot();
+          this.bullet.shoot(); // Si lo guardo en Game
+          this.spaceShip.bullet._appear() // Si guardo la bala en Player
           break;
         // default:
         //   break;
@@ -29,14 +29,29 @@ class Game {
     });
   }
 
+  //   _assignControls() {
+  //   document.addEventListener('keyup', (event) => {
+  //     switch (event.code) {
+  //       case 'Space':
+  //         this.state = 'still'
+  //         break;
+  //       // default:
+  //       //   break;
+  //     }
+  //   });
+  // }
+
   _drawSpaceShip() {
     this.ctx.drawImage(spaceShipImg, this.spaceShip.x, this.spaceShip.y, this.spaceShip.width, this.spaceShip.height)
   }
+
+
   _drawAsteroid() {
     this.asteroids.forEach((el) => {
       this.ctx.drawImage(asteroidImg, el.x, el.y, el.width, el.height);
     });
   }
+
   _makeAsteroid() {
     const newAsteroid = new Asteroids(70, 70);
     this.asteroids.push(newAsteroid)

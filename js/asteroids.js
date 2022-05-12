@@ -15,6 +15,6 @@ class Asteroids {
             } else {
                 this.y = this.y + 1;
             }
-        }, 1000)
+        }, 1700)
     }
 }

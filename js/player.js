@@ -6,8 +6,7 @@ class Player {
         this.width = width;
         this.height = height;
         this.bulletSpeed = 6;
-
-
+        this.bullet = new BulletController(this.x + width / 2, this.y)
     }
 
     moveRight() {
