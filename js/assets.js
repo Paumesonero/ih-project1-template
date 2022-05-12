@@ -6,3 +6,7 @@ spaceShipImg.src = './img/spaceship.png';
 const asteroidImg = new Image();
 asteroidImg.src = './img/asteroids.png'
 
+//bullets
+const bulletImg = new Image();
+bulletImg.src = './img/bullet.png'
+

@@ -1,12 +1,10 @@
 class Player {
-    constructor(x, y, width, height, bulletController) {
+    constructor(x, y, width, height,) {
         this.x = x;
         this.y = y;
-        this.bulletController = bulletController;
         this.width = width;
         this.height = height;
-        this.bulletSpeed = 6;
-        this.bullet = new BulletController(this.x + width / 2, this.y)
+        this.bullet = new BulletController(this.x + width / 2, this.y, 6)
     }
 
     moveRight() {
@@ -24,11 +22,11 @@ class Player {
     }
 
     shoot() {
-        console.log('shoot')
-        const bulletSpeed = 5;
-        const bulletDelay = 7;
-        const bulletX = this.x + this.width / 2;
-        const bulletY = this.y;
-        this.bulletController.shoot(bulletX, bulletY, bulletSpeed, bulletDelay);
+        // console.log('shoot')
+        // const bulletSpeed = 5;
+        // const bulletDelay = 7;
+        // const bulletX = this.x + this.width / 2;
+        // const bulletY = this.y;
+        // this.bulletController.shoot(bulletX, bulletY, bulletSpeed, bulletDelay);
     }
 }
