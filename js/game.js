@@ -1,7 +1,8 @@
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.spaceShip = new Player(450, 400, 130, 130);
+    this.spaceShip = new Player(450, 400, 130, 130, bulletController);
+    this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
     this.speedFall = undefined;
     this.asteroids = [];
@@ -19,8 +20,11 @@ class Game {
         case 'ArrowRight':
           this.spaceShip.moveRight();
           break;
-        default:
+        case 'Space':
+          this.spaceShip.shoot();
           break;
+        // default:
+        //   break;
       }
     });
   }
@@ -70,7 +74,7 @@ class Game {
         let index = this.asteroids.indexOf(asteroid);
         this.asteroids.splice(index, 1)
       }
-      console.log(this.asteroids)
+      //console.log(this.asteroids)
     })
   }
 
