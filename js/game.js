@@ -1,7 +1,7 @@
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.spaceShip = new Player(450, 400, 130, 130);
+    this.spaceShip = new Player(450, 400, 100, 100);
     // this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
     this.bulletInterval = undefined;
@@ -48,6 +48,7 @@ class Game {
 
   _drawSpaceShip() {
     this.ctx.drawImage(spaceShipImg, this.spaceShip.x, this.spaceShip.y, this.spaceShip.width, this.spaceShip.height)
+    //this.ctx.fillRect(this.spaceShip.x, this.spaceShip.y, this.spaceShip.width, this.spaceShip.height)
   }
 
 
@@ -66,7 +67,7 @@ class Game {
   }
 
   _makeBullet() {
-    const newBullet = new BulletController(this.spaceShip.x, this.spaceShip.y, 20, 20, 3)
+    const newBullet = new BulletController(this.spaceShip.x + this.spaceShip.width / 2, this.spaceShip.y, 20, 20, 3)
     this.bullets.push(newBullet)
     console.log(this.bullets)
   }
