@@ -5,6 +5,7 @@
 
 body{
   background-image: url('../img/soldierwhite.jpeg');
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -24,6 +25,61 @@ body{
   margin-top: 30px;
 }
 
+#start-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-left: 50px;
+  
+  
+}
+main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+h1{
+  width: 20%;
+  font-size: 5em;
+}
+#lore{
+  width: 40%;
+  font-size: 1.3em;
+  text-align: left;
+  
+}
+#instructions{
+  width: 25%;
+  text-align: left;
+  border: 2px dashed  black;
+  padding: 5px;
+  font-size: 1.3em;
+
+}
+
+.baldInstructions{
+  font-weight: bold;
+}
+#start{
+  background: none;
+  width: 15%;
+  color:black;
+  border: 3px solid;
+  padding: 1em 2em;
+  font-size: 1em;
+  transition: color 0.5s, border-color 0.5s, box-shadow 0.5s, transform 0.5s;
+}
+
+#start:hover{
+  border-color:#24db0f ;
+  color: white;
+  box-shadow:0 0.5em 0.5em -0.4em #24db0f;
+  transform: translateY(-0.25em);
+  cursor: pointer;
+}
 #lose-page {
   display: none;
 }

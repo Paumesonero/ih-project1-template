@@ -1,7 +1,7 @@
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.spaceShip = new Player(450, 400, 100, 100);
+    this.spaceShip = new Player(450, 400, 90, 90);
     // this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
     this.bulletInterval = undefined;
@@ -23,7 +23,7 @@ class Game {
           break;
         case 'Space':
           // this.bullet.shoot(); // Si lo guardo en Game
-          this.spaceShip.bullet._appear() // Si guardo la bala en Player
+          //this.spaceShip.bullet._appear() // Si guardo la bala en Player
           // this.bullets.push(this.spaceShip.bullet)
           console.log(this.bullets)
 
@@ -92,6 +92,33 @@ class Game {
     })
   }
 
+  _hasShot(asteroid) {
+    for (let i = 0; i < this.bullets.length; i++) {
+      if (dist(this.bullets[i].x, this.bullets[i].y, asteroid.x, asteroid.y) < 5) {
+        this.bullets.splice(i, 1);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // _bulletsAsteroidsCollision() {
+  //   this.bullets.forEach(el => {
+  //     if (
+  //       (this.bullets[0].x >= el.x && this.bullets[0].x <= el.x + el.width ||
+  //         this.bullets[0].x + this.bullets[0].width >= el.x && this.bullets[0].x + this.bullets[0].width <= el.x + el.width ||
+  //         el.x >= this.bullets[0].x && el.x <= this.bullets[0].x + this.bullets[0].width)
+  //       &&
+  //       (this.bullets[0].y >= el.y && this.bullets[0].y <= el.y + el.height ||
+  //         this.bullets[0].y + this.bullets[0].height >= el.y && this.bullets[0].y + this.bullets[0].height <= el.x + el.height ||
+  //         el.y >= this.bullets[0].y && el.y <= this.bullets[0].y + this.bullets[0].height)
+  //     ) {
+  //       let index = this.asteroids.indexOf(el);
+  //       this.asteroids.splice(index, 1);
+  //     }
+  //   })
+  // }
+
 
   gameOver() {
     clearInterval(this.speedFall);
@@ -136,6 +163,7 @@ class Game {
     this._drawSpaceShip();
     this._drawAsteroid();
     this._detectCollision();
+    //this._bulletsAsteroidsCollision();
 
     let counterBullets = 0;
     this.spedUpBullet = setInterval(() => {
