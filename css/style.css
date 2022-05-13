@@ -39,6 +39,7 @@ main{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-family: 'Prompt', sans-serif;
 }
 
 h1{
