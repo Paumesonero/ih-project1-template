@@ -5,12 +5,20 @@ class BulletController {
         this.width = width;
         this.height = height;
         this.speed = speed;
+        this.speedInterval = undefined;
         // Propiedades de la bullet (x,y,width,height,speed)
     }
     _appear() {
         // qué pasa cuando soy disparado y - speed
-        this.y = this.y - this.speed
-        console.log('its me mario')
+        this.speedInterval = setInterval(() => {
+            if (this.y > 600) {
+                clearInterval(this.speedInterval)
+            } else {
+                this.y = this.y - this.speed
+            }
+        }, 500)
+        // this.y = this.y - this.speed
+        // console.log('its me mario')
         // Si desaparezco del canvas, clearInterval
     }
 

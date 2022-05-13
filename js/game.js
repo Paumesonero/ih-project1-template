@@ -4,8 +4,9 @@ class Game {
     this.spaceShip = new Player(450, 400, 130, 130);
     // this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
-    //this.bulletInterval = undefined;
+    this.bulletInterval = undefined;
     this.speedFall = undefined;
+    this.spedUpBullet = undefined;
     this.asteroids = [];
     this.bullets = [];
     // this.state = 'still'; // 'shooting'
@@ -23,7 +24,7 @@ class Game {
         case 'Space':
           // this.bullet.shoot(); // Si lo guardo en Game
           this.spaceShip.bullet._appear() // Si guardo la bala en Player
-          this.bullets.push(this.spaceShip.bullet)
+          // this.bullets.push(this.spaceShip.bullet)
           console.log(this.bullets)
 
           break;
@@ -59,15 +60,16 @@ class Game {
   _drawBullet() {
     this.bullets.forEach((el) => {
       this.ctx.drawImage(bulletImg, el.x, el.y, el.width, el.height)
+
     })
 
   }
 
-  // _makeBullet() {
-  //   const newBullet = new BulletController(this.spaceShip.x, this.spaceShip.y, 10, 10, 5)
-  //   this.bullets.push(newBullet)
-  //   console.log(this.bullets)
-  // }
+  _makeBullet() {
+    const newBullet = new BulletController(this.spaceShip.x, this.spaceShip.y, 20, 20, 3)
+    this.bullets.push(newBullet)
+    console.log(this.bullets)
+  }
 
   _makeAsteroid() {
     const newAsteroid = new Asteroids(70, 70);
@@ -93,6 +95,7 @@ class Game {
   gameOver() {
     clearInterval(this.speedFall);
     clearInterval(this.asteroidInterval);
+    clearInterval(this.spedUpBullet);
 
     const gameOverPage = document.getElementById('lose-page')
     gameOverPage.style = 'display : flex';
@@ -110,6 +113,15 @@ class Game {
     })
   }
 
+  _removeBullet() {
+    this.bullets.forEach((bullet) => {
+      if (bullet.y < -10) {
+        let index = this.bullets.indexOf(bullet);
+        this.bullets.splice(index, 1)
+      }
+    })
+  }
+
 
   _clean() {
     this.ctx.clearRect(0, 0, 1000, 600)
@@ -118,11 +130,20 @@ class Game {
   _update() {
     this._clean();
     this._removeAsteroid();
+    this._removeBullet();
     this._drawBullet();
     this._drawSpaceShip();
     this._drawAsteroid();
-
     this._detectCollision();
+
+    let counterBullets = 0;
+    this.spedUpBullet = setInterval(() => {
+      if (counterBullets < this.bullets.length) {
+        this.bullets[counterBullets]._appear();
+        counterBullets++
+      }
+    }, 1000)
+
     let counter = 0;
     this.speedFall = setInterval(() => {
       if (counter < this.asteroids.length) {
@@ -136,9 +157,9 @@ class Game {
 
   start() {
     this._assignControls()
-    // this.bulletInterval = setInterval(() => {
-    //   this._makeBullet();
-    // }, 300)
+    this.bulletInterval = setInterval(() => {
+      this._makeBullet();
+    }, 1000)
     this.asteroidInterval = setInterval(() => {
       this._makeAsteroid();
     }, 500);
