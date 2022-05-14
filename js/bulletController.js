@@ -16,7 +16,7 @@ class BulletController {
             } else {
                 this.y = this.y - this.speed
             }
-        }, 500)
+        }, 10)
         // this.y = this.y - this.speed
         // console.log('its me mario')
         // Si desaparezco del canvas, clearInterval
