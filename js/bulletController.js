@@ -11,7 +11,7 @@ class BulletController {
     _appear() {
         // qué pasa cuando soy disparado y - speed
         this.speedInterval = setInterval(() => {
-            if (this.y > 600) {
+            if (this.y < -15) {
                 clearInterval(this.speedInterval)
             } else {
                 this.y = this.y - this.speed

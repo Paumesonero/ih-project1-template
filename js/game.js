@@ -8,7 +8,7 @@ class Game {
     this.speedFall = undefined;
     this.spedUpBullet = undefined;
     this.asteroids = [];
-    this.bullets = [];
+    this.bullets = [new BulletController(this.spaceShip.x + this.spaceShip.width / 2, this.spaceShip.y, 20, 20, 3)];
     // this.state = 'still'; // 'shooting'
   }
 
@@ -102,22 +102,24 @@ class Game {
     return false;
   }
 
-  // _bulletsAsteroidsCollision() {
-  //   this.bullets.forEach(el => {
-  //     if (
-  //       (this.bullets[0].x >= el.x && this.bullets[0].x <= el.x + el.width ||
-  //         this.bullets[0].x + this.bullets[0].width >= el.x && this.bullets[0].x + this.bullets[0].width <= el.x + el.width ||
-  //         el.x >= this.bullets[0].x && el.x <= this.bullets[0].x + this.bullets[0].width)
-  //       &&
-  //       (this.bullets[0].y >= el.y && this.bullets[0].y <= el.y + el.height ||
-  //         this.bullets[0].y + this.bullets[0].height >= el.y && this.bullets[0].y + this.bullets[0].height <= el.x + el.height ||
-  //         el.y >= this.bullets[0].y && el.y <= this.bullets[0].y + this.bullets[0].height)
-  //     ) {
-  //       let index = this.asteroids.indexOf(el);
-  //       this.asteroids.splice(index, 1);
-  //     }
-  //   })
-  // }
+  _bulletsAsteroidsCollision() {
+    this.asteroids.forEach(el => {
+      if ((
+        el.x >= this.bullets[0].x && el.x <= this.bullets[0].x + this.bullets[0].width ||
+        bullet.x + bullet.width >= this.bullets[0].x && el.x + el.width <= this.bullets[0].x + this.bullets[0].width)
+        &&
+        (el.y >= this.bullets[0].y && bullet.y <= this.bullets[0].y + this.bullets[0].height ||
+          el.y + el.height >= this.bullets[0].y && el.y + el.height <= this.bullets[0].y + this.bullets[0].height)
+      ) {
+        this.bullets[0].x = 1000;
+      }
+
+
+
+
+    })
+  }
+
 
 
   gameOver() {
