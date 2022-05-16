@@ -122,7 +122,7 @@ class Game {
           this.asteroids.splice(asteroidIndex, 1)
           this.destroyAsteroidSnd.play()
           //this._iterateExplosion();
-          this.totalScore++
+          this.totalScore = this.totalScore + 5
 
         }
       })
@@ -157,6 +157,7 @@ class Game {
       if (bullet.y < -10) {
         let index = this.bullets.indexOf(bullet);
         this.bullets.splice(index, 1)
+        this.totalScore = this.totalScore - 1
       }
     })
   }
