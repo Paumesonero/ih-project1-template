@@ -21,12 +21,5 @@ class Player {
         }
     }
 
-    shoot() {
-        // console.log('shoot')
-        // const bulletSpeed = 5;
-        // const bulletDelay = 7;
-        // const bulletX = this.x + this.width / 2;
-        // const bulletY = this.y;
-        // this.bulletController.shoot(bulletX, bulletY, bulletSpeed, bulletDelay);
-    }
+
 }

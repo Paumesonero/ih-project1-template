@@ -2,16 +2,13 @@ class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.spaceShip = new Player(450, 400, 90, 90);
-    // this.bullet = new BulletController(canvas);
     this.asteroidInterval = undefined;
     this.bulletInterval = undefined;
     this.speedFall = undefined;
     this.spedUpBullet = undefined;
     this.asteroids = [];
-    // this.bullets = [new BulletController(this.spaceShip.x + this.spaceShip.width / 2, this.spaceShip.y, 20, 20, 3)];
     this.bullets = [];
     this.firing = false;
-    // this.state = 'still'; // 'shooting'
   }
 
   _assignControls() {
@@ -24,14 +21,10 @@ class Game {
           this.spaceShip.moveRight();
           break;
         case 'Space':
-          // this.bullet.shoot(); // Si lo guardo en Game
-          //this.spaceShip.bullet._appear() // Si guardo la bala en Player
-          // this.bullets.push(this.spaceShip.bullet)
+
           console.log(this.bullets)
           this.startFiring();
           break;
-        // default:
-        //   break;
       }
     });
 
@@ -45,18 +38,7 @@ class Game {
     });
   }
 
-  //   _assignControls() {
-  //   document.addEventListener('keyup', (event) => {
-  //     switch (event.code) {
-  //       case 'Space':
-  //         this.state = 'still'
-  //         break;
-  //       // default:
-  //       //   break;
-  //     }
-  //   });
-  // }
-
+  // Drawing
   _drawSpaceShip() {
     this.ctx.drawImage(spaceShipImg, this.spaceShip.x, this.spaceShip.y, this.spaceShip.width, this.spaceShip.height)
     //this.ctx.fillRect(this.spaceShip.x, this.spaceShip.y, this.spaceShip.width, this.spaceShip.height)
@@ -71,11 +53,14 @@ class Game {
 
   _drawBullet() {
     if (this.bullets.length != 0) {
-        this.bullets.forEach((el) => {
+      this.bullets.forEach((el) => {
         this.ctx.drawImage(bulletImg, el.x, el.y, el.width, el.height)
       })
     }
   }
+
+  // Making asteroids and bullets.
+
 
   _makeBullet() {
     const newBullet = new BulletController(this.spaceShip.x + this.spaceShip.width / 2, this.spaceShip.y, 20, 20, 3)
@@ -87,6 +72,9 @@ class Game {
     const newAsteroid = new Asteroids(70, 70);
     this.asteroids.push(newAsteroid)
   }
+
+  //Collisions.
+
 
   _detectCollision() {
     this.asteroids.forEach(asteroid => {
@@ -103,15 +91,7 @@ class Game {
     })
   }
 
-  _hasShot(asteroid) {
-    for (let i = 0; i < this.bullets.length; i++) {
-      if (dist(this.bullets[i].x, this.bullets[i].y, asteroid.x, asteroid.y) < 5) {
-        this.bullets.splice(i, 1);
-        return true;
-      }
-    }
-    return false;
-  }
+
 
   _bulletsAsteroidsCollision() {
     this.asteroids.forEach(asteroid => {
@@ -127,7 +107,7 @@ class Game {
     })
   }
 
-
+  // clearing everything once game is finished
   gameOver() {
     clearInterval(this.speedFall);
     clearInterval(this.asteroidInterval);
@@ -139,6 +119,7 @@ class Game {
     hideCanvas.style = 'display: none;'
   }
 
+  //Removing Asteroids and bullet when theyre not in canvas.
   _removeAsteroid() {
     this.asteroids.forEach((asteroid) => {
       if (asteroid.y > 650) {
@@ -163,6 +144,8 @@ class Game {
     this.ctx.clearRect(0, 0, 1000, 600)
   }
 
+  //shooting
+
   startFiring() {
     this.firing = true;
     this.chargeBullets();
@@ -172,7 +155,7 @@ class Game {
         this.bullets[counterBullets]._appear();
         counterBullets++
       }
-    },100)
+    }, 100)
   }
 
   chargeBullets() {
