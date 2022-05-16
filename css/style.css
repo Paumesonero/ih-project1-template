@@ -82,10 +82,36 @@ h1{
 transform: translateY(-0.25em);
   cursor: pointer;
 }
+#lose-main{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+#lose-heading{
+  width: 100%;
+}
 #lose-page {
   display: none;
+  width: 100%;
+  
+}
+#startAgain{
+  background: none;
+  width: 100%;
+  color:black;
+  border: 3px solid;
+  padding: 1em 2em;
+  font-size: 1em;
+  transition: color 0.5s, border-color 0.5s, box-shadow 0.5s, transform 0.5s;
 }
 
+#startAgain:hover{
+  border-color:rgb(163, 172, 159) ;
+  color: white;
+  box-shadow:0 0.5em 0.5em -0.4em rgb(163, 172, 159);
+transform: translateY(-0.25em);
+  cursor: pointer;
+}
 canvas {
   
   display: block;

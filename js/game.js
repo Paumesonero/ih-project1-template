@@ -9,6 +9,13 @@ class Game {
     this.asteroids = [];
     this.bullets = [];
     this.firing = false;
+    this.totalScore = 0;
+    //sounds
+    this.destroyAsteroidSnd = new sound('./sounds/distantexplosion.wav');
+    this.spaceShipCollision = new sound('./sounds/spaceshipCollision.wav')
+    //explosion sprite
+    this.explosionInterval = undefined;
+    this.explosion = undefined;
   }
 
   _assignControls() {
@@ -59,6 +66,16 @@ class Game {
     }
   }
 
+  _drawExplosion() {
+    if (this.explosion) {
+      this.asteroids.forEach((el) => {
+        this.ctx.drawImage(this.explosion, el.x + (el.width / 2) - 100, el.y - 130, 150, 150);
+      })
+    }
+  }
+
+
+
   // Making asteroids and bullets.
 
 
@@ -86,6 +103,8 @@ class Game {
           this.spaceShip.y + this.spaceShip.height >= asteroid.y && this.spaceShip.y + this.spaceShip.height <= asteroid.y + asteroid.height)
       ) {
         console.log('oh oh, we have a problem-oh')
+        this.spaceShipCollision.play()
+
         this.gameOver()
       }
     })
@@ -101,7 +120,10 @@ class Game {
           this.bullets.splice(bulletIndex, 1)
           let asteroidIndex = this.asteroids.indexOf(asteroid);
           this.asteroids.splice(asteroidIndex, 1)
-          console.log('colliding!');
+          this.destroyAsteroidSnd.play()
+          //this._iterateExplosion();
+          this.totalScore++
+
         }
       })
     })
@@ -139,6 +161,13 @@ class Game {
     })
   }
 
+  // sharing total in screen.
+  _showScore() {
+    this.ctx.fillStyle = 'black';
+    this.ctx.font = '15px Prompt';
+    this.ctx.fillText(`Score: ${this.totalScore}`, 880, 30)
+  }
+
 
   _clean() {
     this.ctx.clearRect(0, 0, 1000, 600)
@@ -165,6 +194,25 @@ class Game {
     }, 50)
   }
 
+  //explosion apply
+
+  _iterateExplosion() {
+    let counter = 0;
+    this.explosionInterval = setInterval(() => {
+      if (counter < explosionsArr.length) {
+        this.explosion = explosionsArr[counter];
+        counter++
+      }
+      if (counter == explosionsArr.length) {
+        this.explosion = undefined;
+        clearInterval(this.explosionInterval);
+        counter = 0;
+      }
+    }, 40)
+  }
+
+
+
   _update() {
     this._clean();
     this._removeAsteroid();
@@ -172,8 +220,10 @@ class Game {
     this._drawBullet();
     this._drawSpaceShip();
     this._drawAsteroid();
+    this._drawExplosion();
     this._detectCollision();
     this._bulletsAsteroidsCollision();
+    this._showScore()
     let counter = 0;
     this.speedFall = setInterval(() => {
       if (counter < this.asteroids.length) {
