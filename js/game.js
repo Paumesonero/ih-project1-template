@@ -15,7 +15,8 @@ class Game {
     this.spaceShipCollision = new sound('./sounds/spaceshipCollision.wav')
     //explosion sprite
     this.explosionInterval = undefined;
-    this.explosion = undefined;
+    this.explosion = explosionsArr[0];
+    this.explodingAsteroid = undefined;
   }
 
   _assignControls() {
@@ -67,10 +68,8 @@ class Game {
   }
 
   _drawExplosion() {
-    if (this.explosion) {
-      this.asteroids.forEach((el) => {
-        this.ctx.drawImage(this.explosion, el.x + (el.width / 2) - 100, el.y - 130, 150, 150);
-      })
+    if (this.explodingAsteroid && this.explosion) {
+      this.ctx.drawImage(this.explosion,this.explodingAsteroid.x, this.explodingAsteroid.y, this.explodingAsteroid.width, this.explodingAsteroid.height);
     }
   }
 
@@ -116,14 +115,14 @@ class Game {
     this.asteroids.forEach(asteroid => {
       this.bullets.forEach(bullet => {
         if (bullet.x + bullet.width >= asteroid.x && bullet.x + bullet.width <= asteroid.x + asteroid.width && bullet.y <= asteroid.y + asteroid.height) {
+          this.explodingAsteroid = asteroid;
           let bulletIndex = this.bullets.indexOf(bullet);
           this.bullets.splice(bulletIndex, 1)
           let asteroidIndex = this.asteroids.indexOf(asteroid);
           this.asteroids.splice(asteroidIndex, 1)
           this.destroyAsteroidSnd.play()
-          //this._iterateExplosion();
+          this._iterateExplosion();
           this.totalScore = this.totalScore + 5
-
         }
       })
     })
@@ -198,11 +197,11 @@ class Game {
   //explosion apply
 
   _iterateExplosion() {
-    let counter = 0;
+    let counter = 1;
     this.explosionInterval = setInterval(() => {
       if (counter < explosionsArr.length) {
         this.explosion = explosionsArr[counter];
-        counter++
+        counter++;
       }
       if (counter == explosionsArr.length) {
         this.explosion = undefined;

@@ -41,7 +41,7 @@ step9.src = './sprites/Explosion_9.png';
 const step10 = new Image()
 step10.src = './sprites/Explosion_10.png';
 
-const explosionsArr = [step1, step2, step3, step4, step5, step6, step7, step8, step9, step10]
+const explosionsArr = [step1, step2, step3, step4, step5, step6, step7, step8, step9, step10];
 
 // spaceship being hit sprite
 const boom1 = new Image()
