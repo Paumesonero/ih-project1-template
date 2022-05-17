@@ -1,4 +1,5 @@
 window.onload = function () {
+  //document.getElementById(backgroundSong)
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   const startPage = document.getElementById('start-page');
