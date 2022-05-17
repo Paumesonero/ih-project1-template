@@ -79,7 +79,7 @@ h1{
   border-color:rgb(163, 172, 159) ;
   color: white;
   box-shadow:0 0.5em 0.5em -0.4em rgb(163, 172, 159);
-transform: translateY(-0.25em);
+  transform: translateY(-0.25em);
   cursor: pointer;
 }
 #lose-main{
@@ -89,6 +89,7 @@ transform: translateY(-0.25em);
 }
 #lose-heading{
   width: 100%;
+  color: black;
 }
 #lose-page {
   display: none;
@@ -111,6 +112,9 @@ transform: translateY(-0.25em);
   box-shadow:0 0.5em 0.5em -0.4em rgb(163, 172, 159);
 transform: translateY(-0.25em);
   cursor: pointer;
+}
+#fail{
+  color:rgb(163, 172, 159) ;
 }
 canvas {
   

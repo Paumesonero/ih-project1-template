@@ -121,7 +121,7 @@ class Game {
           let asteroidIndex = this.asteroids.indexOf(asteroid);
           this.asteroids.splice(asteroidIndex, 1)
           this.destroyAsteroidSnd.play()
-          //this._iterateExplosion();
+          this._iterateExplosion();
           this.totalScore = this.totalScore + 5
 
         }
