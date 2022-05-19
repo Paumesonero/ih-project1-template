@@ -30,7 +30,7 @@ class Game {
           break;
         case 'Space':
 
-          console.log(this.bullets)
+
           this.startFiring();
           break;
       }
@@ -69,7 +69,7 @@ class Game {
 
   _drawExplosion() {
     if (this.explodingAsteroid && this.explosion) {
-      this.ctx.drawImage(this.explosion,this.explodingAsteroid.x, this.explodingAsteroid.y, this.explodingAsteroid.width, this.explodingAsteroid.height);
+      this.ctx.drawImage(this.explosion, this.explodingAsteroid.x, this.explodingAsteroid.y, this.explodingAsteroid.width, this.explodingAsteroid.height);
     }
   }
 
@@ -81,7 +81,6 @@ class Game {
   _makeBullet() {
     const newBullet = new BulletController(this.spaceShip.x + this.spaceShip.width / 2, this.spaceShip.y, 20, 20, 3)
     this.bullets.push(newBullet)
-    console.log(this.bullets)
   }
 
   _makeAsteroid() {
@@ -101,7 +100,7 @@ class Game {
         (this.spaceShip.y >= asteroid.y && this.spaceShip.y <= asteroid.y + asteroid.height ||
           this.spaceShip.y + this.spaceShip.height >= asteroid.y && this.spaceShip.y + this.spaceShip.height <= asteroid.y + asteroid.height)
       ) {
-        console.log('oh oh, we have a problem-oh')
+
         this.spaceShipCollision.play()
 
         this.gameOver()
@@ -140,6 +139,7 @@ class Game {
     hideCanvas.style = 'display: none;'
   }
 
+
   //Removing Asteroids and bullet when theyre not in canvas.
   _removeAsteroid() {
     this.asteroids.forEach((asteroid) => {
@@ -147,7 +147,6 @@ class Game {
         let index = this.asteroids.indexOf(asteroid);
         this.asteroids.splice(index, 1)
       }
-      //console.log(this.asteroids)
     })
   }
 
@@ -188,7 +187,6 @@ class Game {
   }
 
   chargeBullets() {
-    console.log('charging!');
     this.bulletInterval = setInterval(() => {
       this._makeBullet();
     }, 50)
@@ -215,6 +213,7 @@ class Game {
 
   _update() {
     this._clean();
+
     this._removeAsteroid();
     this._removeBullet();
     this._drawBullet();
@@ -223,7 +222,8 @@ class Game {
     this._drawExplosion();
     this._detectCollision();
     this._bulletsAsteroidsCollision();
-    this._showScore()
+    this._showScore();
+
     let counter = 0;
     this.speedFall = setInterval(() => {
       if (counter < this.asteroids.length) {
@@ -236,6 +236,7 @@ class Game {
   }
 
   start() {
+
     this._assignControls()
     this.asteroidInterval = setInterval(() => {
       this._makeAsteroid();

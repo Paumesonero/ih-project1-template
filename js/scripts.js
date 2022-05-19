@@ -14,10 +14,4 @@ window.onload = function () {
     game.start();
   }
 
-  tryAgainBtn.onclick = function () {
-    losePage.style = 'display: none';
-    canvas.classList.add('shown');
-    const newGame = new Game(ctx);
-    newGame.start();
-  }
 }
