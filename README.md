@@ -36,4 +36,4 @@ The game ends when the player collides with an asteroid.
 <!-- When you finish, add these links and commit -->
 
 - [Presentation slides](https://slides.com/paumesonero/minimal-b79be8)
-- [Deployed game](file:///Users/paumesonero/Desktop/ironGame/template/ih-project1-template/index.html)
+- [Deployed game](https://paumesonero.github.io/ih-project1-template/)
